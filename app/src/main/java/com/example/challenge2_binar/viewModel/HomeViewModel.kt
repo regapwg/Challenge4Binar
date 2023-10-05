@@ -6,5 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.example.challenge2_binar.produk.MenuList
 
 class HomeViewModel : ViewModel() {
-    val isGrid = MutableLiveData<Boolean>().apply { value = true }
+    val isGrid = MutableLiveData<Boolean>().apply {
+        value = true
+    }
 }

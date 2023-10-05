@@ -28,11 +28,9 @@ class HomeFragment : Fragment() {
     private val kategoriData = Kategori.kategori
     private val kategoriMenuAdapter = MenuAdapterHorizontal(kategoriData)
     private lateinit var homeViewModel: HomeViewModel
-
-
     private lateinit var sharedPreference: SharedPreference
 
-        override fun onCreateView(
+    override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
@@ -76,16 +74,16 @@ class HomeFragment : Fragment() {
 
         viewLayout(setLayout)
         buttonLayout.setOnClickListener {
-            val newSetLayout = !setLayout
-            homeViewModel.isGrid.value = newSetLayout
-            sharedPreference.setPreferences(newSetLayout)
+            val updateLayout = !setLayout
+            homeViewModel.isGrid.value = updateLayout
+            sharedPreference.setPreferences(updateLayout)
         }
     }
 
 
     private fun linear() {
         binding.rvMenu.layoutManager = LinearLayoutManager(requireActivity())
-        val menuAdapter = NewAdapter(menuData, isGrid = false, listener = { pickItem ->
+        val menuAdapter = NewAdapter(menuData, homeViewModel.isGrid.value ?: false, listener = { pickItem ->
             val bundle = bundleOf("pickItem" to pickItem)
             findNavController().navigate(R.id.action_homeFragment_to_detailMenuFragment, bundle)
         })
@@ -95,7 +93,7 @@ class HomeFragment : Fragment() {
 
     private fun grid() {
         binding.rvMenu.layoutManager = GridLayoutManager(requireActivity(), 2)
-        val menuAdapter = NewAdapter(menuData, isGrid = true, listener = { pickItem ->
+        val menuAdapter = NewAdapter(menuData, homeViewModel.isGrid.value ?: true, listener = { pickItem ->
             val bundle = bundleOf("pickItem" to pickItem)
             findNavController().navigate(R.id.action_homeFragment_to_detailMenuFragment, bundle)
         })

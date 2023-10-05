@@ -25,12 +25,12 @@ class DetailMenuFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View{
+    ): View {
         // Inflate the layout for this fragment
-        _binding =  FragmentDetailMenuBinding.inflate(inflater, container, false)
+        _binding = FragmentDetailMenuBinding.inflate(inflater, container, false)
 
 
-        _binding =  FragmentDetailMenuBinding.inflate(inflater, container, false)
+        _binding = FragmentDetailMenuBinding.inflate(inflater, container, false)
 
         detailViewModel = ViewModelProvider(requireActivity())[DetailViewModel::class.java]
 
@@ -50,7 +50,6 @@ class DetailMenuFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         val dataDetail = arguments?.getParcelable<MenuList>("pickItem")
         dataDetail?.let {
@@ -88,13 +87,13 @@ class DetailMenuFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        val bottomNavigationView : BottomNavigationView? = activity?.findViewById(R.id.navBarBottom)
+        val bottomNavigationView: BottomNavigationView? = activity?.findViewById(R.id.navBarBottom)
         bottomNavigationView?.visibility = View.GONE
     }
 
     override fun onDetach() {
         super.onDetach()
-        val bottomNavigationView : BottomNavigationView? = activity?.findViewById(R.id.navBarBottom)
+        val bottomNavigationView: BottomNavigationView? = activity?.findViewById(R.id.navBarBottom)
         bottomNavigationView?.visibility = View.VISIBLE
     }
 
@@ -106,7 +105,7 @@ class DetailMenuFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        _binding=null
+        _binding = null
 
     }
 }
