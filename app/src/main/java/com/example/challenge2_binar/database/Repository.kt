@@ -6,32 +6,38 @@ import androidx.lifecycle.map
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
-class Repositry(application: Application)  {
+class Repository(application: Application)  {
 
-    private val mCartDao: SimpleChartDao
+    private val simpleChartDao: SimpleChartDao
     private val executorService: ExecutorService = Executors.newSingleThreadExecutor()
 
     init {
         val db = SimpleDatabase.getInstance(application)
-        mCartDao = db.simpleChartDao
+        simpleChartDao = db.simpleChartDao
     }
 
     fun insert(simpleChart: SimpleChart) {
-        executorService.execute { mCartDao.insert(simpleChart) }
-    }
-
-    fun deleteById(chartId: Long) {
-        executorService.execute { mCartDao.deleteById(chartId) }
+        executorService.execute {
+            simpleChartDao.insert(simpleChart)
+        }
     }
 
     fun update(simpleChart: SimpleChart) {
-        executorService.execute { mCartDao.update(simpleChart) }
+        executorService.execute {
+            simpleChartDao.update(simpleChart)
+        }
     }
 
-    fun getAllCartItems(): LiveData<List<SimpleChart>> = mCartDao.getAllCartItems()
+    fun deleteById(chartId: Long) {
+        executorService.execute {
+            simpleChartDao.deleteById(chartId)
+        }
+    }
 
-    fun calculateTotalPrice() : LiveData<Int> {
-        return mCartDao.getAllCartItems().map { cartItems ->
+    fun getAllItems(): LiveData<List<SimpleChart>> = simpleChartDao.getAllCartItems()
+
+    fun totalPrice() : LiveData<Int> {
+        return simpleChartDao.getAllCartItems().map { cartItems ->
             var total = 0
             for (cartItem in cartItems) {
                 total += cartItem.itemPrice * cartItem.itemQuantity

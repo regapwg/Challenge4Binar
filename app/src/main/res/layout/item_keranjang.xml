@@ -56,25 +56,25 @@
             app:layout_constraintTop_toBottomOf="@+id/tvMenuu" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/icMinus"
             android:layout_width="18dp"
             android:layout_height="18dp"
             android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toStartOf="@+id/textView6"
-            app:layout_constraintTop_toTopOf="@+id/textView6"
+            app:layout_constraintEnd_toStartOf="@+id/tvTotalPesanann"
+            app:layout_constraintTop_toTopOf="@+id/tvTotalPesanann"
             app:srcCompat="@drawable/minus" />
 
         <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:id="@+id/tvTotalPesanann"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginEnd="4dp"
             android:text="0"
-            app:layout_constraintEnd_toStartOf="@+id/imageView3"
-            app:layout_constraintTop_toTopOf="@+id/imageView3" />
+            app:layout_constraintEnd_toStartOf="@+id/icPlus"
+            app:layout_constraintTop_toTopOf="@+id/icPlus" />
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/icPlus"
             android:layout_width="18dp"
             android:layout_height="18dp"
             android:layout_marginEnd="16dp"
@@ -84,7 +84,7 @@
             app:srcCompat="@drawable/plus" />
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/icDelete"
             android:layout_width="18dp"
             android:layout_height="18dp"
             android:layout_marginEnd="16dp"

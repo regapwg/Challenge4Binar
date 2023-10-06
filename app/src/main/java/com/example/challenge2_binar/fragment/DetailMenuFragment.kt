@@ -10,12 +10,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.challenge2_binar.R
 import com.example.challenge2_binar.databinding.FragmentDetailMenuBinding
 import com.example.challenge2_binar.produk.MenuList
 import com.example.challenge2_binar.viewModel.DetailViewModel
+import com.example.challenge2_binar.viewModel.ViewModelFactory
 import com.google.android.material.bottomnavigation.BottomNavigationView
-
+import com.google.android.material.snackbar.Snackbar
 
 class DetailMenuFragment : Fragment() {
     private var _binding: FragmentDetailMenuBinding? = null
@@ -29,11 +31,8 @@ class DetailMenuFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentDetailMenuBinding.inflate(inflater, container, false)
 
-
-        _binding = FragmentDetailMenuBinding.inflate(inflater, container, false)
-
-        detailViewModel = ViewModelProvider(requireActivity())[DetailViewModel::class.java]
-
+        val viewModelFactory = ViewModelFactory(requireActivity().application)
+        detailViewModel = ViewModelProvider(this, viewModelFactory)[DetailViewModel::class.java]
         detailViewModel.counter.observe(viewLifecycleOwner) { result ->
             binding.tvTotal.text = result.toString()
         }
@@ -42,11 +41,13 @@ class DetailMenuFragment : Fragment() {
             binding.tvTotalHarga.text = newTotalPrice.toString()
         }
 
+
         incrementCount()
         decrementCount()
+
         return binding.root
     }
-
+    @Suppress("DEPRECATION")
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -60,13 +61,13 @@ class DetailMenuFragment : Fragment() {
             binding.tvDescription.text = dataDetail.description
             binding.tvTotalHarga.text = dataDetail.hargaMenu.toString()
             binding.tvAlamat.text = dataDetail.location
-            detailViewModel.initSelectedItem(it)
+            detailViewModel.ItemMenu(it)
             binding.tvAlamat.setOnClickListener {
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(dataDetail.maps))
                 startActivity(intent)
             }
         }
-
+        submitChart()
         buttonUpBack()
     }
 
@@ -82,6 +83,14 @@ class DetailMenuFragment : Fragment() {
         binding.icMinus.setOnClickListener {
             detailViewModel.decrementCount()
             detailViewModel.updateTotalPrice()
+        }
+    }
+
+    private fun submitChart() {
+        binding.buttonKeranjang.setOnClickListener {
+            detailViewModel.addToCart()
+            findNavController().navigate(R.id.action_detailMenuFragment_to_keranjangFragment)
+            Snackbar.make(it, "Item Ditambahkan ke Keranjang!", Snackbar.LENGTH_SHORT).show()
         }
     }
 

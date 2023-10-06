@@ -2,7 +2,10 @@ package com.example.challenge2_binar.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.challenge2_binar.R
 import com.example.challenge2_binar.databinding.ItemKategoriMenuBinding
 import com.example.challenge2_binar.produk.KategoriMenu
 
