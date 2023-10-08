@@ -4,9 +4,12 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.challenge2_binar.database.Repository
 import com.example.challenge2_binar.database.SimpleChart
 import com.example.challenge2_binar.produk.MenuList
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class DetailViewModel(application: Application) : ViewModel(){
     private val _counter: MutableLiveData<Int> = MutableLiveData(0)
@@ -18,7 +21,9 @@ class DetailViewModel(application: Application) : ViewModel(){
     private val _itemMenu = MutableLiveData<MenuList>()
 
     private val repository: Repository
-    init { repository = Repository(application) }
+    init {
+        repository = Repository(application)
+    }
 
 
     fun incrementCount(){
@@ -33,7 +38,7 @@ class DetailViewModel(application: Application) : ViewModel(){
         }
     }
 
-    fun ItemMenu(item: MenuList) {
+    fun itemMenu(item: MenuList) {
         _itemMenu.value = item
         _totalPrice.value = item.hargaMenu
     }
@@ -48,7 +53,9 @@ class DetailViewModel(application: Application) : ViewModel(){
     }
 
     private fun insertCartItem(cartItem: SimpleChart) {
-        repository.insert(cartItem)
+        viewModelScope.launch(Dispatchers.IO){
+            repository.insert(cartItem)
+        }
     }
 
 

@@ -12,6 +12,9 @@ import com.example.challenge2_binar.adapter.KeranjangAdapter
 import com.example.challenge2_binar.databinding.FragmentKeranjangBinding
 import com.example.challenge2_binar.viewModel.KeranjangViewModel
 import com.example.challenge2_binar.viewModel.ViewModelFactory
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class KeranjangFragment : Fragment() {
@@ -29,20 +32,28 @@ class KeranjangFragment : Fragment() {
         val viewModelFactory = ViewModelFactory(requireActivity().application)
         keranjangViewModel = ViewModelProvider(this, viewModelFactory)[KeranjangViewModel::class.java]
 
+        setupRecyclerView()
+
+
+        return binding.root
+    }
+
+    private fun setupRecyclerView() {
         keranjangAdapter = KeranjangAdapter(keranjangViewModel)
         binding.rvKeranjang.setHasFixedSize(true)
         binding.rvKeranjang.layoutManager = LinearLayoutManager(requireContext())
         binding.rvKeranjang.adapter = keranjangAdapter
 
-        keranjangViewModel.itemLiveData.observe(viewLifecycleOwner) {}
         keranjangViewModel.getAllitems.observe(viewLifecycleOwner) {
             keranjangAdapter.data(it)
         }
+
+        keranjangViewModel.itemLiveData.observe(viewLifecycleOwner) {
+
+        }
+
         keranjangViewModel.totalPrice.observe(viewLifecycleOwner) {
             binding.tvTotalHargaPesanan.text = it.toString()
         }
-
-
-        return binding.root
     }
 }

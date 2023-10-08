@@ -61,7 +61,7 @@ class DetailMenuFragment : Fragment() {
             binding.tvDescription.text = dataDetail.description
             binding.tvTotalHarga.text = dataDetail.hargaMenu.toString()
             binding.tvAlamat.text = dataDetail.location
-            detailViewModel.ItemMenu(it)
+            detailViewModel.itemMenu(it)
             binding.tvAlamat.setOnClickListener {
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(dataDetail.maps))
                 startActivity(intent)

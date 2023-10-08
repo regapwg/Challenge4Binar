@@ -4,8 +4,11 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.challenge2_binar.database.Repository
 import com.example.challenge2_binar.database.SimpleChart
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class KeranjangViewModel (application: Application) : ViewModel() {
 
@@ -18,10 +21,20 @@ class KeranjangViewModel (application: Application) : ViewModel() {
 
     var totalPrice: LiveData<Int> = repository.totalPrice()
 
-    fun delete(chartId: Long) { repository.deleteById(chartId) }
+    fun delete(chartId: Long) {
+        viewModelScope.launch(Dispatchers.IO)
+        {
+            repository.deleteById(chartId)
+        }
+
+    }
 
     fun update(simpleChart: SimpleChart) {
-        repository.update(simpleChart)
+        viewModelScope.launch(Dispatchers.IO)
+        {
+            repository.update(simpleChart)
+        }
         _itemLiveData.value = simpleChart
+
     }
 }

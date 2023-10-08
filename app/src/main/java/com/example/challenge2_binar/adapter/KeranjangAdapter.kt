@@ -1,5 +1,6 @@
 package com.example.challenge2_binar.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -10,6 +11,9 @@ import com.example.challenge2_binar.database.SimpleChart
 import com.example.challenge2_binar.databinding.ItemKeranjangBinding
 import com.example.challenge2_binar.viewModel.KeranjangViewModel
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class KeranjangAdapter(private val keranjangViewModel: KeranjangViewModel) :
     RecyclerView.Adapter<KeranjangAdapter.KeranjangHolder>() {
@@ -27,18 +31,15 @@ class KeranjangAdapter(private val keranjangViewModel: KeranjangViewModel) :
         holder.bindContent(viewKeranjangHolder)
 
         holder.btnDelete.setOnClickListener {
-            keranjangViewModel.delete(viewKeranjangHolder.itemId)
-            Snackbar.make(it, "Item dihapus dari keranjang!", Snackbar.LENGTH_SHORT).show()
+                keranjangViewModel.delete(viewKeranjangHolder.itemId)
+                Snackbar.make(it, "Item dihapus dari keranjang!", Snackbar.LENGTH_SHORT).show()
         }
 
         holder.btnPlus.setOnClickListener {
             val updateValue = viewKeranjangHolder.itemQuantity + 1
             viewKeranjangHolder.itemQuantity = updateValue
-
-
             keranjangViewModel.update(viewKeranjangHolder)
             holder.quantity.text = updateValue.toString()
-
             viewKeranjangHolder.totalPrice = viewKeranjangHolder.itemPrice * updateValue
             holder.harga.text = viewKeranjangHolder.totalPrice.toString()
         }
@@ -48,22 +49,20 @@ class KeranjangAdapter(private val keranjangViewModel: KeranjangViewModel) :
                 val updateValue = viewKeranjangHolder.itemQuantity - 1
                 viewKeranjangHolder.itemQuantity = updateValue
                 viewKeranjangHolder.totalPrice = viewKeranjangHolder.itemPrice * updateValue
-
                 keranjangViewModel.update(viewKeranjangHolder)
                 holder.quantity.text = updateValue.toString()
-
                 viewKeranjangHolder.totalPrice = viewKeranjangHolder.itemPrice * updateValue
                 holder.harga.text = viewKeranjangHolder.totalPrice.toString()
             }
         }
-
-
     }
 
     override fun getItemCount(): Int = simpleChart.size
 
+    @SuppressLint("NotifyDataSetChanged")
     fun data(simpleChart: List<SimpleChart>) {
         this.simpleChart = simpleChart
+        notifyDataSetChanged()
     }
 
     class KeranjangHolder(private val binding: ItemKeranjangBinding) :
