@@ -34,10 +34,10 @@ class KeranjangFragment : Fragment() {
         binding.rvKeranjang.layoutManager = LinearLayoutManager(requireContext())
         binding.rvKeranjang.adapter = keranjangAdapter
 
-        keranjangViewModel.allCartItems.observe(viewLifecycleOwner) {
-            keranjangAdapter.setData(it)
+        keranjangViewModel.itemLiveData.observe(viewLifecycleOwner) {}
+        keranjangViewModel.getAllitems.observe(viewLifecycleOwner) {
+            keranjangAdapter.data(it)
         }
-        keranjangViewModel.cartItemLiveData.observe(viewLifecycleOwner) {}
         keranjangViewModel.totalPrice.observe(viewLifecycleOwner) {
             binding.tvTotalHargaPesanan.text = it.toString()
         }

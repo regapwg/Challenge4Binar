@@ -11,10 +11,10 @@ class KeranjangViewModel (application: Application) : ViewModel() {
 
     private val repository: Repository = Repository(application)
 
-    val allCartItems: LiveData<List<SimpleChart>> = repository.getAllItems()
+    val getAllitems: LiveData<List<SimpleChart>> = repository.getAllItems()
 
-    private val _cartItemLiveData = MutableLiveData<SimpleChart>()
-    val cartItemLiveData: LiveData<SimpleChart> = _cartItemLiveData
+    private val _itemLiveData = MutableLiveData<SimpleChart>()
+    val itemLiveData: LiveData<SimpleChart> = _itemLiveData
 
     var totalPrice: LiveData<Int> = repository.totalPrice()
 
@@ -22,6 +22,6 @@ class KeranjangViewModel (application: Application) : ViewModel() {
 
     fun update(simpleChart: SimpleChart) {
         repository.update(simpleChart)
-        _cartItemLiveData.value = simpleChart
+        _itemLiveData.value = simpleChart
     }
 }

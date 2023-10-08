@@ -62,7 +62,7 @@ class KeranjangAdapter(private val keranjangViewModel: KeranjangViewModel) :
 
     override fun getItemCount(): Int = simpleChart.size
 
-    fun setData(simpleChart: List<SimpleChart>) {
+    fun data(simpleChart: List<SimpleChart>) {
         this.simpleChart = simpleChart
     }
 
