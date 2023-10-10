@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.challenge2_binar.R
 import com.example.challenge2_binar.adapter.KeranjangAdapter
@@ -29,10 +30,15 @@ class KeranjangFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentKeranjangBinding.inflate(inflater, container, false)
+
         val viewModelFactory = ViewModelFactory(requireActivity().application)
         keranjangViewModel = ViewModelProvider(this, viewModelFactory)[KeranjangViewModel::class.java]
 
         setupRecyclerView()
+
+        binding.btnPesan.setOnClickListener {
+            findNavController().navigate(R.id.action_keranjangFragment_to_konfirmasiPesananFragment)
+        }
 
 
         return binding.root
