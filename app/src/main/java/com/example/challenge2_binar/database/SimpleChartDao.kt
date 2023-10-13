@@ -22,6 +22,9 @@ interface SimpleChartDao {
     @Query("DELETE FROM simple_chart_table WHERE itemId = :chartId")
     fun deleteById(chartId: Long)
 
+    @Query("DELETE FROM simple_chart_table")
+    fun deleteAll()
+
     @Update
     fun update(simpleChart: SimpleChart)
 }

@@ -31,6 +31,11 @@ class KonfirmasiPesananFragment : Fragment() {
         setupRecyclerView()
         buttonUpBack()
 
+        binding.btnPesanFix.setOnClickListener {
+            val dialog = DialogFragment()
+            dialog.show(childFragmentManager, "dialog")
+        }
+
         return binding.root
     }
     private fun setupRecyclerView() {
@@ -51,6 +56,8 @@ class KonfirmasiPesananFragment : Fragment() {
             binding.tvTotallPembayaran.text = it.toString()
         }
     }
+
+
     private fun buttonUpBack() {
         binding.btnBack.setOnClickListener {
             requireActivity().onBackPressed()

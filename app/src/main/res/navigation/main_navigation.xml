@@ -55,7 +55,15 @@
         <action
             android:id="@+id/action_konfirmasiPesananFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_konfirmasiPesananFragment_to_dialogFragment"
+            app:destination="@id/dialogFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/dialogFragment"
+        android:name="com.example.challenge2_binar.fragment.DialogFragment"
+        android:label="fragment_dialog"
+        tools:layout="@layout/fragment_dialog" />
 
 
 </navigation>

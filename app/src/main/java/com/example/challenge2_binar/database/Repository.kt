@@ -34,6 +34,13 @@ class Repository(application: Application)  {
         }
     }
 
+    fun deleteAll(){
+        executorService.execute {
+            simpleChartDao.deleteAll()
+        }
+    }
+
+
     fun getAllItems(): LiveData<List<SimpleChart>> = simpleChartDao.getAllCartItems()
 
     fun totalPrice() : LiveData<Int> {

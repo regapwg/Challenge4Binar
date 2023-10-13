@@ -26,7 +26,13 @@ class KeranjangViewModel (application: Application) : ViewModel() {
         {
             repository.deleteById(chartId)
         }
+    }
 
+    fun deleteAllItem() {
+        viewModelScope.launch(Dispatchers.IO)
+        {
+            repository.deleteAll()
+        }
     }
 
     fun update(simpleChart: SimpleChart) {
