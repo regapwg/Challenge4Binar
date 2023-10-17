@@ -70,7 +70,7 @@ class HomeFragment : Fragment() {
 
     private fun setPrefLayout() {
         val buttonLayout = binding.imageList
-        val setLayout = homeViewModel.isGrid.value ?: sharedPreference.getPreferences()
+        val setLayout = homeViewModel.isGrid.value?: sharedPreference.getPreferences()
 
         viewLayout(setLayout)
         buttonLayout.setOnClickListener {

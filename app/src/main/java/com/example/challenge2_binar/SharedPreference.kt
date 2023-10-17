@@ -14,4 +14,5 @@ class SharedPreference(context: Context) {
     fun getPreferences(): Boolean {
         return preferences.getBoolean("IS_GRID", true)
     }
+
 }

@@ -46,7 +46,11 @@
         android:id="@+id/profileFragment"
         android:name="com.example.challenge2_binar.fragment.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_loginActivity"
+            app:destination="@id/loginActivity" />
+    </fragment>
     <fragment
         android:id="@+id/konfirmasiPesananFragment"
         android:name="com.example.challenge2_binar.fragment.KonfirmasiPesananFragment"
@@ -64,6 +68,19 @@
         android:name="com.example.challenge2_binar.fragment.DialogFragment"
         android:label="fragment_dialog"
         tools:layout="@layout/fragment_dialog" />
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.example.challenge2_binar.fragment.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" />
+    <activity
+        android:id="@+id/loginActivity"
+        android:name="com.example.challenge2_binar.LoginActivity"
+        android:label="LoginActivity" />
+    <activity
+        android:id="@+id/registerActivity"
+        android:name="com.example.challenge2_binar.RegisterActivity"
+        android:label="RegisterActivity" />
 
 
 </navigation>
