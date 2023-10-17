@@ -19,6 +19,7 @@ import com.example.challenge2_binar.databinding.FragmentHomeBinding
 import com.example.challenge2_binar.produk.Kategori
 import com.example.challenge2_binar.produk.Menu
 import com.example.challenge2_binar.viewModel.HomeViewModel
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 
 
 class HomeFragment : Fragment() {
@@ -85,6 +86,9 @@ class HomeFragment : Fragment() {
         binding.rvMenu.layoutManager = LinearLayoutManager(requireActivity())
         val menuAdapter = NewAdapter(menuData, homeViewModel.isGrid.value ?: false, listener = { pickItem ->
             val bundle = bundleOf("pickItem" to pickItem)
+            FirebaseCrashlytics.getInstance().recordException(
+                RuntimeException("item $bundle")
+            )
             findNavController().navigate(R.id.action_homeFragment_to_detailMenuFragment, bundle)
         })
         binding.rvMenu.adapter = menuAdapter
